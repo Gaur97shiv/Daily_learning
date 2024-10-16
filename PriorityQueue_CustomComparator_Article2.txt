@@ -1,0 +1,116 @@
+
+Mastering Java's PriorityQueue: Custom Comparators for Ascending and Descending Order Insertion 🔄🔼🔽
+
+Java’s `PriorityQueue` is a powerful data structure designed to store elements with a dynamic priority. By default, it orders elements in *natural ascending order*, but you can modify this behavior by providing a custom comparator. Want to switch things up and have elements arranged in descending order? No problem! With custom comparators, you can easily define how elements are compared during insertion. 🧠💻
+
+In this article, we’ll dive deep into **how custom comparators work** in Java’s `PriorityQueue`, particularly focusing on how comparisons are made during element insertion. Let’s also break down an example with both ascending and descending order insertion using pairs of values.
+
+---
+
+📜 How Comparisons Work During Insertion
+
+Each time you insert an element into the `PriorityQueue`, the **comparator** decides its place within the queue based on how it compares to its parent. This process happens through **heapification**, where each new element is “bubbled up” until it finds its correct spot.
+
+Here's how the comparison works during insertion:
+
+- **🆕 New element** is compared with its **parent** element.
+- If you're inserting at index `i`, the parent is located at `(i - 1) / 2`.
+- The comparator is used like this: 
+  ```java
+  comparator.compare(newElement, parentElement)
+  ```
+
+The result can be:
+- **Negative** (e.g., `newElement < parentElement`): A swap occurs, and the new element continues comparing with its new parent.
+- **Non-negative**: No swap needed, and the element remains in place.
+
+Let’s see this concept in action with a clear example!
+
+---
+
+Example: Comparing Pairs (👫) in Ascending and Descending Order
+
+Consider we have a `PriorityQueue` of **pairs of integers** where each pair is represented as `(x, y)`:
+
+| Pair | Explanation |
+|------|-------------|
+| (3, 1) | First pair |
+| (2, 4) | Second pair |
+| (5, 0) | Third pair |
+| (1, 3) | Fourth pair |
+
+We want to insert these pairs into a `PriorityQueue` based on the first value (`x`). Below, we’ll describe the process for both **ascending** and **descending** order insertion.
+
+---
+
+🟢 Ascending Order Comparator (Lowest to Highest)
+
+To sort the pairs in **ascending order**, we use the following comparator:
+
+```java
+Comparator<int[]> ascendingComparator = (a, b) -> Integer.compare(a[0], b[0]);
+```
+
+**Step-by-step insertion:**
+
+1. **Insert (3, 1)**: It’s the first element, so it becomes the root of the heap. 🌱
+2. **Insert (2, 4)**: The comparator compares `2` with `3`. Since `2 < 3`, they are swapped. The queue becomes:  
+   `[(2, 4), (3, 1)]` 🔄
+3. **Insert (5, 0)**: The comparator compares `5` with `2`. Since `5 > 2`, no swap is needed. The queue becomes:  
+   `[(2, 4), (3, 1), (5, 0)]`
+4. **Insert (1, 3)**: The comparator compares `1` with `2`. Since `1 < 2`, they are swapped. The new element continues bubbling up, but `1` is smaller than any other parent. The queue becomes:  
+   `[(1, 3), (2, 4), (5, 0), (3, 1)]` 🔄
+
+👉 **Resulting Priority Queue (ascending order):** `[(1, 3), (2, 4), (5, 0), (3, 1)]`
+
+---
+
+🔴 Descending Order Comparator (Highest to Lowest)
+
+To sort the pairs in **descending order**, we simply reverse the comparison logic:
+
+```java
+Comparator<int[]> descendingComparator = (a, b) -> Integer.compare(b[0], a[0]);
+```
+
+**Step-by-step insertion:**
+
+1. **Insert (3, 1)**: It’s the first element, so it becomes the root. 🌱
+2. **Insert (2, 4)**: The comparator compares `2` with `3`. Since `2 < 3`, no swap is needed. The queue remains:  
+   `[(3, 1), (2, 4)]`
+3. **Insert (5, 0)**: The comparator compares `5` with `3`. Since `5 > 3`, they are swapped. The queue becomes:  
+   `[(5, 0), (2, 4), (3, 1)]` 🔄
+4. **Insert (1, 3)**: The comparator compares `1` with `5`. Since `1 < 5`, no swap is needed. The queue remains:  
+   `[(5, 0), (2, 4), (3, 1), (1, 3)]`
+
+👉 **Resulting Priority Queue (descending order):** `[(5, 0), (2, 4), (3, 1), (1, 3)]`
+
+---
+
+🔍 Conclusion
+
+By using custom comparators, you have complete control over how elements are compared and ordered in a `PriorityQueue`. Whether you need to arrange elements in **ascending** or **descending order**, the comparator’s role is crucial in deciding the element’s position in the binary heap.
+
+👩‍💻💡 Next time you work with a `PriorityQueue`, remember that with just a few lines of code, you can define your own order and take advantage of this incredibly flexible data structure!
+
+---
+
+Example Code Snippet:
+
+```java
+PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));  // Ascending order
+
+// Add elements
+queue.add(new int[]{3, 1});
+queue.add(new int[]{2, 4});
+queue.add(new int[]{5, 0});
+queue.add(new int[]{1, 3});
+
+// Accessing the priority queue
+while (!queue.isEmpty()) {
+    int[] pair = queue.poll();
+    System.out.println(Arrays.toString(pair));
+}
+```
+
+Now go ahead and implement your own custom logic with ease. Happy coding! 🎉
