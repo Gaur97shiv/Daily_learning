@@ -1,0 +1,34 @@
+what is aws lambda ?
+AWS Lambda is a serverless compute service provided by Amazon Web Services (AWS) that allows you to run code without provisioning or managing servers. The terms AWS Lambda and AWS Lambda function are related but distinct:
+
+AWS Lambda
+AWS Lambda refers to the entire service provided by AWS. It is a platform that lets you execute your code in response to various events without worrying about the underlying infrastructure. Here's what makes AWS Lambda unique:
+
+Serverless Execution: No need to provision or manage servers.
+Event-Driven: Executes code in response to events such as HTTP requests via API Gateway, changes in S3 buckets, updates to DynamoDB tables, or scheduled events.
+Cost-Efficient: Pay only for the compute time your code consumes (measured in milliseconds).
+Scalable: Automatically scales based on the volume of requests.
+Features of AWS Lambda:
+Runtime Support: Supports multiple languages like Python, Node.js, Java, Go, .NET, and custom runtimes.
+Trigger Integration: Works seamlessly with other AWS services (S3, DynamoDB, API Gateway, etc.).
+Execution Environment: Each function runs in a container that AWS manages.
+Timeouts and Memory: Functions can execute for up to 15 minutes, with memory allocation ranging from 128 MB to 10 GB.
+AWS Lambda Function
+An AWS Lambda function is the actual code you write and deploy to perform a specific task using the AWS Lambda service. It is the smallest unit of deployment and execution within AWS Lambda.
+
+A Lambda function includes:
+Code: The logic written to perform a task. It can be uploaded as a zip file or a container image.
+Handler: The entry point where AWS invokes your function. For example, in Python, it could be lambda_function.lambda_handler.
+Configuration: Memory allocation, timeout settings, environment variables, and IAM roles.
+Triggers: Events that invoke the Lambda function (e.g., API Gateway requests, S3 events, etc.).
+Key Components of a Lambda Function:
+Event: Input data that triggers the function.
+Handler: The code that processes the input and generates output.
+Response: The output returned by the function.
+Key Differences
+Feature	AWS Lambda (Service)	AWS Lambda Function
+Definition	The entire AWS serverless platform	A specific piece of code executed by the Lambda service
+Scope	Manages infrastructure, scaling, and integrations	Executes a specific task based on events
+Functionality	Provides the framework for running serverless code	Contains the logic for solving a problem
+Customization	Supports multiple functions and integrations	Each function has its own configuration and code
+In summary, AWS Lambda is the overarching service, while an AWS Lambda function is a specific executable piece of code deployed within the AWS Lambda service.
