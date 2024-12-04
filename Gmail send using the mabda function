@@ -1,0 +1,21 @@
+Workflow
+Rule Trigger:
+
+The EventBridge Rule (CDDailyTrigger) triggers at 00:30 UTC daily based on the cron expression.
+Targeted Lambda:
+
+The rule targets a Lambda function, identified by its ARN (LambdaTargetArn).
+Lambda Execution:
+
+The input payload (JSON) is sent to the Lambda function.
+The Lambda function processes this payload:
+Makes a POST request to the provided URL.
+Adds headers like userId (from RootUserId) and Content-Type.
+API Call:
+
+The Lambda function sends an HTTP POST request to the endpoint (TargetApp) /api/v1/system/update-users-information.
+Email Sending:
+
+The backend API (update-users-information) presumably processes the data and sends an email to users. This might include:
+Fetching user details from a database.
+Using an email service like SES (Simple Email Service) or a third-party API.
