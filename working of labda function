@@ -1,0 +1,110 @@
+How Lambda Functions Work
+AWS Lambda is a serverless compute service that executes your code in response to events like an API Gateway request, DynamoDB stream, or in your case, a CloudWatch Event (EventBridge Rule).
+
+How to Connect Lambda to a CloudWatch Event
+CloudWatch Rule:
+
+A CloudWatch Event Rule (now EventBridge Rule) is configured to trigger based on a schedule or specific events.
+The rule specifies the Lambda function as its target using the Lambda's ARN.
+IAM Role:
+
+Ensure the Lambda function's execution role includes permissions for:
+Logging to CloudWatch Logs.
+Any other AWS services the function needs to interact with.
+Lambda Function Execution:
+
+When triggered, AWS Lambda executes your function code using the payload provided by the rule.
+Where to Find the Lambda Function
+You can manage Lambda functions using the following tools:
+
+1. AWS Management Console:
+Navigate to AWS Console → Lambda service.
+You’ll see all deployed Lambda functions listed. You can view, edit, and configure them here.
+2. VS Code with AWS Toolkit:
+Install the AWS Toolkit for Visual Studio Code.
+This lets you browse AWS resources (including Lambda functions) directly in VS Code.
+Steps:
+Open the AWS Toolkit in VS Code.
+Configure credentials.
+Navigate to the Lambda section to see existing functions.
+3. Local Code Repository:
+If you or your team wrote the function, check your repository (e.g., GitHub, Bitbucket, or local files).
+The Lambda function is typically defined as a .js, .py, or .java file.
+Sample Lambda Function (Node.js)
+Here’s a sample file for a Lambda function to process the event and send an HTTP POST request:
+
+javascript
+Copy code
+const https = require('https');
+
+exports.handler = async (event) => {
+    console.log("Received event:", JSON.stringify(event, null, 2));
+
+    // Extract URL and headers from the event input
+    const { method, url, headers, body } = event;
+
+    // Prepare options for the HTTP request
+    const options = {
+        method: method || 'POST',
+        headers: headers.reduce((acc, { name, value }) => {
+            acc[name] = value;
+            return acc;
+        }, {}),
+    };
+
+    return new Promise((resolve, reject) => {
+        const req = https.request(url, options, (res) => {
+            let responseBody = '';
+            res.on('data', (chunk) => responseBody += chunk);
+            res.on('end', () => {
+                console.log("Response:", responseBody);
+                resolve({
+                    statusCode: res.statusCode,
+                    body: responseBody
+                });
+            });
+        });
+
+        req.on('error', (err) => {
+            console.error("Error:", err);
+            reject(err);
+        });
+
+        // Send request body
+        if (body) {
+            req.write(body);
+        }
+
+        req.end();
+    });
+};
+How to Frame the Lambda Function
+Event Input:
+
+The event is passed from CloudWatch. Your function should handle this input and extract relevant data.
+Dependencies:
+
+Include libraries like https for HTTP calls or aws-sdk for interacting with AWS services.
+Testing Locally:
+
+Install AWS SAM CLI or use AWS Toolkit in VS Code.
+Use a mock event JSON file to test locally before deploying.
+Deploying to AWS:
+
+Use AWS CLI, SAM CLI, or the AWS Management Console to upload the function code.
+Example CLI command:
+bash
+Copy code
+aws lambda update-function-code --function-name MyFunction --zip-file fileb://function.zip
+Mock Event for Testing
+json
+Copy code
+{
+  "method": "POST",
+  "url": "http://example.com/api/v1/system/update-users-information",
+  "headers": [
+    { "name": "userId", "value": "root-user-id" },
+    { "name": "Content-Type", "value": "application/json" }
+  ],
+  "body": "{\"key\": \"value\"}"
+}
