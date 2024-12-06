@@ -1,0 +1,43 @@
+ Spring Boot Interview Questions Asked in Most Spring Boot Interviews 🚀
+
+If you’re preparing for a Spring Boot interview, here’s a curated list of commonly asked questions that will help you get ready!
+
+🔹 Spring Boot Interview Questions for Freshers:
+ 1. What are the advantages of using Spring Boot?
+ 2. What are the key components of Spring Boot?
+ 3. Why choose Spring Boot over Spring?
+ 4. What is the starter dependency of the Spring Boot module?
+ 5. How does Spring Boot work?
+ 6. What does the @SpringBootApplication annotation do internally?
+ 7. What is the purpose of @ComponentScan in the class files?
+ 8. How does a Spring Boot application get started?
+ 9. What are starter dependencies?
+ 10. What is Spring Initializer?
+ 11. What is Spring Boot CLI and what are its benefits?
+ 12. What are the most common Spring Boot CLI commands?
+
+🔹 Advanced Spring Boot Questions:
+13. What are the basic annotations offered by Spring Boot?
+14. What is Spring Boot dependency management?
+15. Can we create a non-web application in Spring Boot?
+16. Is it possible to change the port of the embedded Tomcat server in Spring Boot?
+17. What is the default port of Tomcat in Spring Boot?
+18. Can we override or replace the embedded Tomcat server in Spring Boot?
+19. Can we disable the default web server in the Spring Boot application?
+20. How to disable a specific auto-configuration class?
+21. Explain the @RestController annotation in Spring Boot.
+22. What is the difference between @RestController and @Controller in Spring Boot?
+23. Describe the flow of HTTPS requests through the Spring Boot application.
+24. What is the difference between RequestMapping and GetMapping?
+25. What is the use of Profiles in Spring Boot?
+26. What is Spring Actuator? What are its advantages?
+27. How to enable Actuator in a Spring Boot application?
+28. What are the actuator-provided endpoints for monitoring a Spring Boot application?
+29. How to get the list of all the beans in your Spring Boot application?
+30. How to check the environment properties in your Spring Boot application?
+31. How to enable debugging logs in the Spring Boot application?
+32. Where do we define properties in a Spring Boot application?
+33. What is Dependency Injection?
+34. What is an IOC container?
+
+💡 Preparation is key! These questions cover both fundamental and advanced concepts of Spring Boot, so whether you’re a beginner or more experienced, reviewing these will give you a solid edge in your interview.
