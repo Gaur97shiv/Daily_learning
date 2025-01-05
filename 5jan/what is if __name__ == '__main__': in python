@@ -1,0 +1,58 @@
+if __name__ == '__main__': ka use Python me ek special mechanism ke liye hota hai. Iska kaam ye ensure karna hota hai ki kuch specific code sirf tabhi chale jab file ko directly run kiya ja raha ho, aur nahi chale jab file ko as a module import kiya ja raha ho.
+
+Samajhne ke liye Details:
+__name__ variable:
+
+Jab Python ek file ko execute karta hai, to har file me ek special variable __name__ assign hota hai.
+Agar file directly run ho rahi hai (e.g., python myfile.py), tab __name__ ki value '__main__' hoti hai.
+Agar file import ho rahi hai (e.g., import myfile), tab __name__ ki value file ke naam (e.g., 'myfile') hoti hai.
+Purpose:
+
+Ye line ensure karti hai ki kuch code (jaise testing, main logic, etc.) sirf tab chale jab file ko directly execute kiya ja raha ho, aur nahi chale jab file kisi aur program me use ki ja rahi ho.
+Hinglish Example:
+python
+Copy code
+# mymodule.py
+def add(a, b):
+    return a + b
+
+if __name__ == '__main__':
+    print("This will run only if this file is run directly!")
+    print(add(5, 10))
+Case 1: File ko directly run karenge
+bash
+Copy code
+$ python mymodule.py
+Output:
+This will run only if this file is run directly!
+15
+Case 2: File ko import karenge
+python
+Copy code
+# anotherfile.py
+import mymodule
+
+result = mymodule.add(3, 7)
+print(result)
+Output:
+
+plaintext
+Copy code
+10
+Benefits (Faayde):
+Code Reusability:
+
+Agar aapki file functions ya classes contain karti hai, to wo dusri file me import ho sakti hai bina unnecessary code execute kiye.
+Testing:
+
+Main script ke logic ko directly test kar sakte ho bina interference ke.
+Clean Code:
+
+Code me better organization aur modularization aata hai.
+So, if __name__ == '__main__': ek safety check ki tarah kaam karta hai jo ensure karta hai ki aapka code unnecessary situations me execute na ho.
+
+
+
+
+
+
